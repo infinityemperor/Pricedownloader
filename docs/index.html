@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Скачивание файла</title>
+</head>
+<body>
+<p>Загрузка файла…</p>
+
+<script>
+fetch('https://api.github.com/repos/infinityemperor/Pricedownloader/releases/latest')
+  .then(r => r.json())
+  .then(data => {
+    if (!data.assets || data.assets.length === 0) {
+      document.body.innerHTML = 'Файл не найден';
+      return;
+    }
+    window.location.href = data.assets[0].browser_download_url;
+  })
+  .catch(() => {
+    document.body.innerHTML = 'Ошибка загрузки';
+  });
+</script>
+</body>
+</html>
