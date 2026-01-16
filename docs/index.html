@@ -2,24 +2,18 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Скачивание файла</title>
+  <title>Download</title>
 </head>
 <body>
-<p>Загрузка файла…</p>
 
 <script>
 fetch('https://api.github.com/repos/infinityemperor/Pricedownloader/releases/latest')
   .then(r => r.json())
-  .then(data => {
-    if (!data.assets || data.assets.length === 0) {
-      document.body.innerHTML = 'Файл не найден';
-      return;
-    }
-    window.location.href = data.assets[0].browser_download_url;
-  })
-  .catch(() => {
-    document.body.innerHTML = 'Ошибка загрузки';
+  .then(d => {
+    if (!d.assets || d.assets.length === 0) return;
+    location.replace(d.assets[0].browser_download_url);
   });
 </script>
+
 </body>
 </html>
